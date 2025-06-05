@@ -1,0 +1,2646 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grind 108: FAANG Interview Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+      }
+      .progress-bar {
+        transition: width 0.5s ease-in-out;
+      }
+      .theme-toggle {
+        cursor: pointer;
+      }
+      [data-theme="dark"] {
+        background-color: #1a202c;
+        color: #e2e8f0;
+      }
+      [data-theme="dark"] .bg-white {
+        background-color: #2d3748;
+      }
+      [data-theme="dark"] .text-gray-700 {
+        color: #e2e8f0;
+      }
+      [data-theme="dark"] .bg-gray-100 {
+        background-color: #4a5568;
+      }
+      [data-theme="dark"] .border-gray-200 {
+        border-color: #4a5568;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gray-50 text-gray-700 transition-colors duration-300"
+    data-theme="light"
+  >
+    <div class="container mx-auto p-6 max-w-5xl">
+      <!-- Header -->
+      <header class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-indigo-600">
+          Grind 108: FAANG Interview Prep
+        </h1>
+        <button
+          id="theme-toggle"
+          class="theme-toggle p-2 rounded-full bg-gray-200 hover:bg-gray-300"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+        </button>
+      </header>
+
+      <!-- Overall Summary -->
+      <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">Overall Progress</h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-4">
+            <div
+              id="overall-progress"
+              class="progress-bar bg-indigo-600 h-4 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="overall-percentage" class="ml-4 text-lg font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="overall-summary" class="text-gray-600">
+          Completed: 0 / 108 | Remaining: 108
+        </p>
+      </div>
+
+      <!-- Table of Contents -->
+      <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">Table of Contents</h2>
+        <ul class="list-disc pl-6">
+          <li>
+            <a href="#week-1" class="text-indigo-600 hover:underline"
+              >Week 1: Arrays, Strings, Hash Tables</a
+            >
+          </li>
+          <li>
+            <a href="#week-2" class="text-indigo-600 hover:underline"
+              >Week 2: Linked Lists, Stacks/Queues, Others</a
+            >
+          </li>
+          <li>
+            <a href="#week-3" class="text-indigo-600 hover:underline"
+              >Week 3: Trees, Sorting/Searching, Design</a
+            >
+          </li>
+          <li>
+            <a href="#week-4" class="text-indigo-600 hover:underline"
+              >Week 4: Graphs, Dynamic Programming, Math</a
+            >
+          </li>
+          <li>
+            <a href="#week-5" class="text-indigo-600 hover:underline"
+              >Week 5: Hard Problems</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Week 1 -->
+      <div id="week-1" class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Week 1: Arrays, Strings, Hash Tables
+        </h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div
+              id="week-1-progress"
+              class="progress-bar bg-indigo-600 h-3 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="week-1-percentage" class="ml-4 text-sm font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="week-1-summary" class="text-gray-600 mb-4">
+          Completed: 0 / 26 | Remaining: 26
+        </p>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 p-3 text-left">#</th>
+              <th class="border border-gray-200 p-3 text-left">Problem Name</th>
+              <th class="border border-gray-200 p-3 text-left">Difficulty</th>
+              <th class="border border-gray-200 p-3 text-left">
+                LeetCode Link
+              </th>
+              <th class="border border-gray-200 p-3 text-center">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 p-3">1</td>
+              <td class="border border-gray-200 p-3">Maximum Subarray</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/maximum-subarray"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="1"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">2</td>
+              <td class="border border-gray-200 p-3">
+                Product of Array Except Self
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/product-of-array-except-self"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="2"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">3</td>
+              <td class="border border-gray-200 p-3">Rotate Array</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/rotate-array"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="3"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">4</td>
+              <td class="border border-gray-200 p-3">
+                Container With Most Water
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/container-with-most-water"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="4"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">5</td>
+              <td class="border border-gray-200 p-3">3Sum</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/3sum"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="5"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">6</td>
+              <td class="border border-gray-200 p-3">3Sum Closest</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/3sum-closest"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="6"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">7</td>
+              <td class="border border-gray-200 p-3">
+                Find All Anagrams in a String
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/find-all-anagrams-in-a-string"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="7"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">8</td>
+              <td class="border border-gray-200 p-3">
+                Longest Substring Without Repeating Characters
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/longest-substring-without-repeating-characters"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="8"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">9</td>
+              <td class="border border-gray-200 p-3">
+                Longest Palindromic Substring
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/longest-palindromic-substring"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="9"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">10</td>
+              <td class="border border-gray-200 p-3">
+                String to Integer (atoi)
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/string-to-integer-atoi"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="10"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">11</td>
+              <td class="border border-gray-200 p-3">
+                Letter Combinations of a Phone Number
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/letter-combinations-of-a-phone-number"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="11"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">12</td>
+              <td class="border border-gray-200 p-3">Word Search</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/word-search"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="12"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">13</td>
+              <td class="border border-gray-200 p-3">
+                Longest Repeating Character Replacement
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/longest-repeating-character-replacement"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="13"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">14</td>
+              <td class="border border-gray-200 p-3">Group Anagrams</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  beloongref="https://leetcode.com/problems/group-anagrams"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="14"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">15</td>
+              <td class="border border-gray-200 p-3">Top K Frequent Words</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/top-k-frequent-words"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="15"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">16</td>
+              <td class="border border-gray-200 p-3">Accounts Merge</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/accounts-merge"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="16"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">17</td>
+              <td class="border border-gray-200 p-3">
+                Find the Duplicate Number
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/find-the-duplicate-number"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="17"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">18</td>
+              <td class="border border-gray-200 p-3">
+                Longest Consecutive Sequence
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/longest-consecutive-sequence"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="18"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">19</td>
+              <td class="border border-gray-200 p-3">Contiguous Array</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/contiguous-array"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="19"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">20</td>
+              <td class="border border-gray-200 p-3">Subarray Sum Equals K</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/subarray-sum-equals-k"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="20"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">21</td>
+              <td class="border border-gray-200 p-3">Sort Colors</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/sort-colors"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="21"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">22</td>
+              <td class="border border-gray-200 p-3">
+                K Closest Points to Origin
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/k-closest-points-to-origin"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="22"
+                  checked
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">23</td>
+              <td class="border border-gray-200 p-3">Spiral Matrix</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/spiral-matrix"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="23"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">24</td>
+              <td class="border border-gray-200 p-3">Set Matrix Zeroes</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/set-matrix-zeroes"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="24"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">25</td>
+              <td class="border border-gray-200 p-3">Rotate Image</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/rotate-image"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="25"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">26</td>
+              <td class="border border-gray-200 p-3">Single Number</td>
+              <td class="border border-gray-200 p-3">Easy*</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/single-number"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="1"
+                  data-problem="26"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Week 2 -->
+      <div id="week-2" class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Week 2: Linked Lists, Stacks/Queues, Others
+        </h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div
+              id="week-2-progress"
+              class="progress-bar bg-indigo-600 h-3 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="week-2-percentage" class="ml-4 text-sm font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="week-2-summary" class="text-gray-600 mb-4">
+          Completed: 0 / 26 | Remaining: 26
+        </p>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 p-3 text-left">#</th>
+              <th class="border border-gray-200 p-3 text-left">Problem Name</th>
+              <th class="border border-gray-200 p-3 text-left">Difficulty</th>
+              <th class="border border-gray-200 p-3 text-left">
+                LeetCode Link
+              </th>
+              <th class="border border-gray-200 p-3 text-center">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 p-3">1</td>
+              <td class="border border-gray-200 p-3">
+                Remove Nth Node From End of List
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/remove-nth-node-from-end-of-list"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="1"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">2</td>
+              <td class="border border-gray-200 p-3">Swap Nodes in Pairs</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/swap-nodes-in-pairs"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="2"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">3</td>
+              <td class="border border-gray-200 p-3">Add Two Numbers</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/add-two-numbers"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="3"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">4</td>
+              <td class="border border-gray-200 p-3">Rotate List</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/rotate-list"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="4"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">5</td>
+              <td class="border border-gray-200 p-3">Reorder List</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/reorder-list"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="5"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">6</td>
+              <td class="border border-gray-200 p-3">Odd Even Linked List</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/odd-even-linked-list"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="6"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">7</td>
+              <td class="border border-gray-200 p-3">Sort List</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/sort-list"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="7"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">8</td>
+              <td class="border border-gray-200 p-3">Min Stack</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/min-stack"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="8"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">9</td>
+              <td class="border border-gray-200 p-3">
+                Evaluate Reverse Polish Notation
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/evaluate-reverse-polish-notation"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="9"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">10</td>
+              <td class="border border-gray-200 p-3">Daily Temperatures</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/daily-temperatures"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="10"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">11</td>
+              <td class="border border-gray-200 p-3">Asteroid Collision</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/asteroid-collision"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="11"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">12</td>
+              <td class="border border-gray-200 p-3">Combination Sum</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/combination-sum"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="12"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">13</td>
+              <td class="border border-gray-200 p-3">Permutations</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/permutations"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="13"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">14</td>
+              <td class="border border-gray-200 p-3">Subsets</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/subsets"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="14"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">15</td>
+              <td class="border border-gray-200 p-3">Generate Parentheses</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/generate-parentheses"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="15"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">16</td>
+              <td class="border border-gray-200 p-3">Next Permutation</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/next-permutation"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="16"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">17</td>
+              <td class="border border-gray-200 p-3">Valid Sudoku</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/valid-sudoku"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="17"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">18</td>
+              <td class="border border-gray-200 p-3">Gas Station</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/gas-station"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="18"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">19</td>
+              <td class="border border-gray-200 p-3">Jump Game</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/jump-game"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="19"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">20</td>
+              <td class="border border-gray-200 p-3">Largest Number</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/largest-number"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="20"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">21</td>
+              <td class="border border-gray-200 p-3">
+                Random Pick with Weight
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/random-pick-with-weight"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="21"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">22</td>
+              <td class="border border-gray-200 p-3">
+                Insert Delete GetRandom O(1)
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/insert-delete-getrandom-o1"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="22"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">23</td>
+              <td class="border border-gray-200 p-3">
+                Maximum Product Subarray
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/maximum-product-subarray"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="23"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">24</td>
+              <td class="border border-gray-200 p-3">Merge Intervals</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/merge-intervals"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="24"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">25</td>
+              <td class="border border-gray-200 p-3">Insert Interval</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/insert-interval"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="25"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">26</td>
+              <td class="border border-gray-200 p-3">
+                Non-overlapping Intervals
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/non-overlapping-intervals"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="2"
+                  data-problem="26"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Week 3 -->
+      <div id="week-3" class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Week 3: Trees, Sorting/Searching, Design
+        </h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div
+              id="week-3-progress"
+              class="progress-bar bg-indigo-600 h-3 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="week-3-percentage" class="ml-4 text-sm font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="week-3-summary" class="text-gray-600 mb-4">
+          Completed: 0 / 26 | Remaining: 26
+        </p>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 p-3 text-left">#</th>
+              <th class="border border-gray-200 p-3 text-left">Problem Name</th>
+              <th class="border border-gray-200 p-3 text-left">Difficulty</th>
+              <th class="border border-gray-200 p-3 text-left">
+                LeetCode Link
+              </th>
+              <th class="border border-gray-200 p-3 text-center">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 p-3">1</td>
+              <td class="border border-gray-200 p-3">
+                Binary Tree Level Order Traversal
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/binary-tree-level-order-traversal"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="1"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">2</td>
+              <td class="border border-gray-200 p-3">
+                Binary Tree Zigzag Level Order Traversal
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="2"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">3</td>
+              <td class="border border-gray-200 p-3">
+                Binary Tree Right Side View
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/binary-tree-right-side-view"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="3"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">4</td>
+              <td class="border border-gray-200 p-3">
+                Validate Binary Search Tree
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/validate-binary-search-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="4"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">5</td>
+              <td class="border border-gray-200 p-3">
+                Kth Smallest Element in a BST
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/kth-smallest-element-in-a-bst"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="5"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">6</td>
+              <td class="border border-gray-200 p-3">
+                Inorder Successor in BST
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/inorder-successor-in-bst"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="6"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">7</td>
+              <td class="border border-gray-200 p-3">
+                Lowest Common Ancestor of a Binary Tree
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="7"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">8</td>
+              <td class="border border-gray-200 p-3">
+                Construct Binary Tree from Preorder and Inorder Traversal
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="8"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">9</td>
+              <td class="border border-gray-200 p-3">
+                Maximum Width of Binary Tree
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/maximum-width-of-binary-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="9"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">10</td>
+              <td class="border border-gray-200 p-3">
+                All Nodes Distance K in Binary Tree
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="10"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">11</td>
+              <td class="border border-gray-200 p-3">
+                Search in Rotated Sorted Array
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/search-in-rotated-sorted-array"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 land-text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="11"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">12</td>
+              <td class="border border-gray-200 p-3">
+                Find Minimum in Rotated Sorted Array
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="12"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">13</td>
+              <td class="border border-gray-200 p-3">
+                Kth Largest Element in an Array
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/kth-largest-element-in-an-array"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="13"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">14</td>
+              <td class="border border-gray-200 p-3">
+                Find K Closest Elements
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/find-k-closest-elements"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="14"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">15</td>
+              <td class="border border-gray-200 p-3">Search a 2D Matrix</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/search-a-2d-matrix"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="15"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">16</td>
+              <td class="border border-gray-200 p-3">
+                Implement Trie (Prefix Tree)
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/implement-trie-prefix-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="16"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">17</td>
+              <td class="border border-gray-200 p-3">
+                Design Add and Search Words Data Structure
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/design-add-and-search-words-data-structure"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="17"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">18</td>
+              <td class="border border-gray-200 p-3">
+                Time Based Key-Value Store
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/time-based-key-value-store"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="18"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">19</td>
+              <td class="border border-gray-200 p-3">Design Hit Counter</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/design-hit-counter"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="19"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">20</td>
+              <td class="border border-gray-200 p-3">LRU Cache</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/lru-cache"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="20"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">21</td>
+              <td class="border border-gray-200 p-3">Path Sum II</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/path-sum-ii"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="21"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">22</td>
+              <td class="border border-gray-200 p-3">Path Sum III</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/path-sum-iii"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="22"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">23</td>
+              <td class="border border-gray-200 p-3">
+                Encode and Decode Strings
+              </td>
+              <td class="border border-gray-200 p-3">Medium BEFORE Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/encode-and-decode-strings"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="23"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">24</td>
+              <td class="border border-gray-200 p-3">Meeting Rooms II</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/meeting-rooms-ii"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="24"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">25</td>
+              <td class="border border-gray-200 p-3">
+                Shortest Path to Get Food
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/shortest-path-to-get-food"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="25"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-族-200 p-3">26</td>
+              <td class="border border-gray-200 p-3">Rectangle Overlap</td>
+              <td class="border border-gray-200 p-3">Easy*</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/rectangle-overlap"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="3"
+                  data-problem="26"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Week 4 -->
+      <div id="week-4" class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">
+          Week 4: Graphs, Dynamic Programming, Math
+        </h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div
+              id="week-4-progress"
+              class="progress-bar bg-indigo-600 h-3 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="week-4-percentage" class="ml-4 text-sm font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="week-4-summary" class="text-gray-600 mb-4">
+          Completed: 0 / 27 | Remaining: 27
+        </p>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 p-3 text-left">#</th>
+              <th class="border border-gray-200 p-3 text-left">Problem Name</th>
+              <th class="border border-gray-200 p-3 text-left">Difficulty</th>
+              <th class="border border-gray-200 p-3 text-left">
+                LeetCode Link
+              </th>
+              <th class="border border-gray-200 p-3 text-center">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 p-3">1</td>
+              <td class="border border-gray-200 p-3">Number of Islands</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/number-of-islands"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="1"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">2</td>
+              <td class="border border-gray-200 p-3">Course Schedule</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/course-schedule"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="2"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">3</td>
+              <td class="border border-gray-200 p-3">Course Schedule II</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/course-schedule-ii"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="3"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">4</td>
+              <td class="border border-gray-200 p-3">Clone Graph</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/clone-graph"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="4"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">5</td>
+              <td class="border border-gray-200 p-3">
+                Number of Connected Components in an Undirected Graph
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="5"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">6</td>
+              <td class="border border-gray-200 p-3">Graph Valid Tree</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/graph-valid-tree"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="6"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">7</td>
+              <td class="border border-gray-200 p-3">
+                Pacific Atlantic Water Flow
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/pacific-atlantic-water-flow"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="7"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">8</td>
+              <td class="border border-gray-200 p-3">Rotting Oranges</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/rotting-oranges"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="8"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">9</td>
+              <td class="border border-gray-200 p-3">
+                Cheapest Flights Within K Stops
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/cheapest-flights-within-k-stops"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="9"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">10</td>
+              <td class="border border-gray-200 p-3">Minimum Height Trees</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/minimum-height-trees"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="10"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">11</td>
+              <td class="border border-gray-200 p-3">Coin Change</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/coin-change"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="11"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">12</td>
+              <td class="border border-gray-200 p-3">
+                Longest Increasing Subsequence
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/longest-increasing-subsequence"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="12"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">13</td>
+              <td class="border border-gray-200 p-3">Word Break</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/word-break"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="13"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">14</td>
+              <td class="border border-gray-200 p-3">
+                Partition Equal Subset Sum
+              </td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/partition-equal-subset-sum"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="14"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">15</td>
+              <td class="border border-gray-200 p-3">House Robber</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/house-robber"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="15"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">16</td>
+              <td class="border border-gray-200 p-3">Decode Ways</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/decode-ways"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="16"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">17</td>
+              <td class="border border-gray-200 p-3">Combination Sum IV</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/combination-sum-iv"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="17"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">18</td>
+              <td class="border border-gray-200 p-3">Maximal Square</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/maximal-square"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="18"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">19</td>
+              <td class="border border-gray-200 p-3">Pow(x, n)</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/powx-n"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="19"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">20</td>
+              <td class="border border-gray-200 p-3">Number of 1 Bits</td>
+              <td class="border border-gray-200 p-3">Easy*</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/number-of-1-bits"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="20"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">21</td>
+              <td class="border border-gray-200 p-3">Reverse Integer</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/reverse-integer"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="21"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">22</td>
+              <td class="border border-gray-200 p-3">Basic Calculator II</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/basic-calculator-ii"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="22"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">23</td>
+              <td class="border border-gray-200 p-3">Task Scheduler</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/task-scheduler"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="23"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">24</td>
+              <td class="border border-gray-200 p-3">Minimum Knight Moves</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/minimum-knight-moves"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="24"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">25</td>
+              <td class="border border-gray-200 p-3">Decode String</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/decode-string"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="25"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">26</td>
+              <td class="border border-gray-200 p-3">Unique Paths</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/unique-paths"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="26"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">27</td>
+              <td class="border border-gray-200 p-3">01 Matrix</td>
+              <td class="border border-gray-200 p-3">Medium</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/01-matrix"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="4"
+                  data-problem="27"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Week 5 -->
+      <div id="week-5" class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-xl font-semibold mb-4">Week 5: Hard Problems</h2>
+        <div class="flex items-center mb-4">
+          <div class="w-full bg-gray-200 rounded-full h-3">
+            <div
+              id="week-5-progress"
+              class="progress-bar bg-indigo-600 h-3 rounded-full"
+              style="width: 0%"
+            ></div>
+          </div>
+          <span id="week-5-percentage" class="ml-4 text-sm font-medium"
+            >0%</span
+          >
+        </div>
+        <p id="week-5-summary" class="text-gray-600 mb-4">
+          Completed: 0 / 3 | Remaining: 3
+        </p>
+        <table class="w-full border-collapse">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-200 p-3 text-left">#</th>
+              <th class="border border-gray-200 p-3 text-left">Problem Name</th>
+              <th class="border border-gray-200 p-3 text-left">Difficulty</th>
+              <th class="border border-gray-200 p-3 text-left">
+                LeetCode Link
+              </th>
+              <th class="border border-gray-200 p-3 text-center">Done</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-gray-200 p-3">1</td>
+              <td class="border border-gray-200 p-3">Trapping Rain Water</td>
+              <td class="border border-gray-200 p-3">Hard</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/trapping-rain-water"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="5"
+                  data-problem="1"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">2</td>
+              <td class="border border-gray-200 p-3">
+                Median of Two Sorted Arrays
+              </td>
+              <td class="border border-gray-200 p-3">Hard</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/median-of-two-sorted-arrays"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="5"
+                  data-problem="2"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td class="border border-gray-200 p-3">3</td>
+              <td class="border border-gray-200 p-3">
+                Regular Expression Matching
+              </td>
+              <td class="border border-gray-200 p-3">Hard</td>
+              <td class="border border-gray-200 p-3">
+                <a
+                  href="https://leetcode.com/problems/regular-expression-matching"
+                  class="text-indigo-600 hover:underline"
+                  >Link</a
+                >
+              </td>
+              <td class="border border-gray-200 p-3 text-center">
+                <input
+                  type="checkbox"
+                  class="done-checkbox"
+                  data-week="5"
+                  data-problem="3"
+                />
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll(".done-checkbox");
+        const totalProblems = 108;
+        const weekProblems = { 1: 26, 2: 26, 3: 26, 4: 27, 5: 3 };
+
+        // Load saved state from localStorage
+        checkboxes.forEach((checkbox) => {
+          const week = checkbox.dataset.week;
+          const problem = checkbox.dataset.problem;
+          const key = `grind108-week${week}-problem${problem}`;
+          if (localStorage.getItem(key) === "true") {
+            checkbox.checked = true;
+          }
+          checkbox.addEventListener("change", () => {
+            localStorage.setItem(key, checkbox.checked);
+            updateProgress();
+          });
+        });
+
+        // Theme toggle
+        const themeToggle = document.getElementById("theme-toggle");
+        themeToggle.addEventListener("click", () => {
+          const body = document.body;
+          const isDark = body.dataset.theme === "dark";
+          body.dataset.theme = isDark ? "light" : "dark";
+          themeToggle.innerHTML = isDark
+            ? `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>`
+            : `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>`;
+        });
+
+        // Update progress
+        function updateProgress() {
+          let totalCompleted = 0;
+          const weekCompleted = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+
+          checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+              totalCompleted++;
+              weekCompleted[checkbox.dataset.week]++;
+            }
+          });
+
+          // Update overall progress
+          const overallPercentage = (totalCompleted / totalProblems) * 100;
+          document.getElementById(
+            "overall-progress"
+          ).style.width = `${overallPercentage}%`;
+          document.getElementById(
+            "overall-percentage"
+          ).textContent = `${Math.round(overallPercentage)}%`;
+          document.getElementById(
+            "overall-summary"
+          ).textContent = `Completed: ${totalCompleted} / ${totalProblems} | Remaining: ${
+            totalProblems - totalCompleted
+          }`;
+
+          // Update week progress
+          for (let week = 1; week <= 5; week++) {
+            const weekPercentage =
+              (weekCompleted[week] / weekProblems[week]) * 100;
+            document.getElementById(
+              `week-${week}-progress`
+            ).style.width = `${weekPercentage}%`;
+            document.getElementById(
+              `week-${week}-percentage`
+            ).textContent = `${Math.round(weekPercentage)}%`;
+            document.getElementById(
+              `week-${week}-summary`
+            ).textContent = `Completed: ${weekCompleted[week]} / ${
+              weekProblems[week]
+            } | Remaining: ${weekProblems[week] - weekCompleted[week]}`;
+          }
+        }
+
+        // Initial progress update
+        updateProgress();
+      });
+    </script>
+  </body>
+</html>
