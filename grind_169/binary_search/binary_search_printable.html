@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Search Ultimate Cheatsheet - High Quality Print</title>
+    <style>
+        @media print {
+            body { 
+                margin: 0; 
+                padding: 8mm; 
+                font-size: 9pt;
+                line-height: 1.2;
+                color: #000;
+                background: white;
+            }
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+            .avoid-break { page-break-inside: avoid; }
+            .section { 
+                margin-bottom: 4mm;
+                page-break-inside: avoid;
+            }
+            .problems-grid { 
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 2mm;
+                page-break-inside: avoid;
+            }
+            .problem-card {
+                page-break-inside: avoid;
+                margin-bottom: 2mm;
+            }
+            h1 { font-size: 16pt; }
+            h2 { font-size: 12pt; }
+            h3 { font-size: 10pt; }
+            pre { font-size: 8pt; line-height: 1.1; }
+            table { font-size: 8pt; }
+            .tips { page-break-inside: avoid; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.4;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 15mm;
+            font-size: 11pt;
+            color: #1a1a1a;
+            background: white;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            margin-bottom: 6mm;
+            padding-bottom: 3mm;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 20pt;
+            color: #1e40af;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            margin: 2mm 0 0 0;
+            font-size: 11pt;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4mm;
+            margin-bottom: 4mm;
+        }
+        
+        .column {
+            flex: 1;
+        }
+        
+        .section {
+            margin-bottom: 5mm;
+            border: 1px solid #e2e8f0;
+            padding: 3mm;
+            border-radius: 2mm;
+            background: #fafafa;
+            page-break-inside: avoid;
+        }
+        
+        .section h2 {
+            margin: 0 0 2mm 0;
+            font-size: 14pt;
+            color: #1e40af;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 1mm;
+            font-weight: 600;
+        }
+        
+        .section h3 {
+            margin: 3mm 0 1mm 0;
+            font-size: 12pt;
+            color: #475569;
+            font-weight: 600;
+        }
+        
+        pre {
+            background: #f1f5f9;
+            padding: 2mm;
+            border-left: 2mm solid #3b82f6;
+            margin: 2mm 0;
+            overflow-x: auto;
+            font-size: 9pt;
+            line-height: 1.3;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            border-radius: 1mm;
+            color: #0f172a;
+        }
+        
+        .decision-tree {
+            background: #eff6ff;
+            padding: 3mm;
+            border-left: 2mm solid #3b82f6;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            white-space: pre-line;
+            font-size: 10pt;
+            line-height: 1.4;
+            border-radius: 1mm;
+            color: #1e40af;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            page-break-inside: avoid;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 9pt;
+            margin: 2mm 0;
+        }
+        
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 1.5mm;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .highlight {
+            background: #fef3c7;
+            padding: 2mm;
+            border-left: 2mm solid #f59e0b;
+            margin: 2mm 0;
+            border-radius: 1mm;
+            font-weight: 500;
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3mm;
+            margin-top: 3mm;
+        }
+        
+        .problem-card {
+            background: #ffffff;
+            padding: 2.5mm;
+            border-radius: 2mm;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            page-break-inside: avoid;
+        }
+        
+        .problem-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1.5mm;
+            font-size: 10pt;
+        }
+        
+        .problem-card pre {
+            margin: 1mm 0 0 0;
+            font-size: 8pt;
+            background: #f8fafc;
+            border-left: 1mm solid #6366f1;
+        }
+        
+        .tips {
+            background: #dcfce7;
+            border-left: 2mm solid #16a34a;
+            padding: 3mm;
+            margin: 3mm 0;
+            border-radius: 1mm;
+            page-break-inside: avoid;
+        }
+        
+        .tips h3 {
+            margin-top: 0;
+            color: #166534;
+            font-size: 12pt;
+        }
+        
+        .tips ul {
+            margin: 2mm 0;
+            padding-left: 4mm;
+        }
+        
+        .tips li {
+            margin-bottom: 1mm;
+            line-height: 1.3;
+        }
+        
+        .print-settings {
+            position: fixed;
+            top: 15mm;
+            right: 15mm;
+            background: #1e40af;
+            color: white;
+            border: none;
+            padding: 2mm 4mm;
+            border-radius: 2mm;
+            cursor: pointer;
+            font-size: 11pt;
+            font-weight: 600;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .print-settings:hover {
+            background: #1e3a8a;
+        }
+        
+        .quality-note {
+            background: #e0f2fe;
+            border-left: 2mm solid #0288d1;
+            padding: 3mm;
+            margin: 3mm 0;
+            font-size: 10pt;
+            border-radius: 1mm;
+        }
+        
+        .template-box {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            padding: 2mm;
+            margin: 2mm 0;
+            border-radius: 1mm;
+        }
+        
+        .pattern-indicator {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 0.5mm 1.5mm;
+            border-radius: 1mm;
+            font-size: 8pt;
+            font-weight: 600;
+            margin-right: 2mm;
+        }
+        
+        .complexity {
+            color: #059669;
+            font-size: 8pt;
+            font-weight: 600;
+            margin-top: 1mm;
+        }
+        
+        /* Epson L3252 optimized settings */
+        @media print {
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
+            
+            body {
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .section, .problem-card, .tips {
+                box-shadow: none;
+                border-width: 0.5pt;
+            }
+            
+            pre {
+                border-left-width: 1pt;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-settings no-print" onclick="window.print()">🖨️ Print (Epson L3252 Optimized)</button>
+    
+    <div class="quality-note no-print">
+        <strong>📋 Print Settings for Epson L3252:</strong> Use "High Quality" or "Best" print mode • A4 Paper • 600 DPI or higher • Color mode for best results • Enable "Print backgrounds" in browser settings
+    </div>
+    
+    <div class="header">
+        <h1>🎯 Binary Search Ultimate Cheatsheet</h1>
+        <p>High-Quality Reference Guide for Quick Revision</p>
+    </div>
+    
+    <div class="section avoid-break">
+        <h2>🚀 Quick Decision Tree</h2>
+        <div class="decision-tree">What are you trying to do?
+├── Find EXACT target → Pattern 1 (left <= right)
+├── Find POSITION/BOUNDARY → Pattern 2 (left < right)
+└── Find FIRST/LAST occurrence → Pattern 1 with modifications
+
+Key Rule: Pattern 1 = Search & Eliminate | Pattern 2 = Converge to Answer</div>
+    </div>
+    
+    <div class="two-column">
+        <div class="column">
+            <div class="section avoid-break">
+                <h2>📋 Pattern 1: left <= right</h2>
+                <span class="pattern-indicator">SEARCH & ELIMINATE</span>
+                <pre>def pattern1(nums, target):
+    left, right = 0, len(nums) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1  # Not found</pre>
+                <div class="highlight">
+                    <strong>✅ Use when:</strong> Searching for exact value, can return "not found"<br>
+                    <strong>⚡ Key:</strong> Always use mid ± 1, eliminates elements completely
+                </div>
+            </div>
+        </div>
+        
+        <div class="column">
+            <div class="section avoid-break">
+                <h2>📋 Pattern 2: left < right</h2>
+                <span class="pattern-indicator">CONVERGE TO POSITION</span>
+                <pre>def pattern2(nums):
+    left, right = 0, len(nums) - 1
+    
+    while left < right:
+        mid = (left + right) // 2
+        
+        if condition(nums[mid]):
+            right = mid      # Keep potential answer
+        else:
+            left = mid + 1   # Eliminate mid
+    
+    return left  # left == right (converged)</pre>
+                <div class="highlight">
+                    <strong>✅ Use when:</strong> Finding position/boundary, answer always exists<br>
+                    <strong>⚡ Key:</strong> Sometimes right = mid, converges to single element
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>🔥 Essential Problems - Core Patterns</h2>
+        <div class="problems-grid">
+            <div class="problem-card avoid-break">
+                <div class="problem-title">1. Classic Binary Search</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target: return mid
+        elif nums[mid] < target: left = mid + 1
+        else: right = mid - 1
+    return -1</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">2. Search Insert Position</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def searchInsert(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target: return mid
+        elif nums[mid] < target: left = mid + 1
+        else: right = mid - 1
+    return left  # 🎯 Insertion point</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">3. First Occurrence</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def findFirst(nums, target):
+    left, right = 0, len(nums) - 1
+    result = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            result = mid
+            right = mid - 1  # 🎯 Continue left
+        elif nums[mid] < target: left = mid + 1
+        else: right = mid - 1
+    return result</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">4. Last Occurrence</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def findLast(nums, target):
+    left, right = 0, len(nums) - 1
+    result = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            result = mid
+            left = mid + 1   # 🎯 Continue right
+        elif nums[mid] < target: left = mid + 1
+        else: right = mid - 1
+    return result</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">5. Ceiling (Smallest ≥ target)</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def findCeiling(nums, target):
+    left, right = 0, len(nums) - 1
+    result = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] >= target:
+            result = mid
+            right = mid - 1  # 🎯 Look for smaller
+        else:
+            left = mid + 1
+    return result</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">6. Floor (Largest ≤ target)</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def findFloor(nums, target):
+    left, right = 0, len(nums) - 1
+    result = -1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] <= target:
+            result = mid
+            left = mid + 1   # 🎯 Look for larger
+        else:
+            right = mid - 1
+    return result</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="page-break"></div>
+    
+    <div class="section">
+        <h2>🌟 Advanced Problems - Rotated & Special Cases</h2>
+        <div class="problems-grid">
+            <div class="problem-card avoid-break">
+                <div class="problem-title">7. Search in Rotated Array</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target: return mid
+        
+        # 🎯 Identify sorted half
+        if nums[left] <= nums[mid]:  # Left sorted
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        else:  # Right sorted
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">8. Find Min in Rotated Array</div>
+                <span class="pattern-indicator">P2</span>
+                <pre>def findMin(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        # 🎯 Compare with right to find rotation
+        if nums[mid] > nums[right]:
+            left = mid + 1  # Min in right half
+        else:
+            right = mid     # Min in left half
+    return nums[left]</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">9. Find Peak Element</div>
+                <span class="pattern-indicator">P2</span>
+                <pre>def findPeakElement(nums):
+    left, right = 0, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        # 🎯 Follow the ascending slope
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+    return left</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">10. First Bad Version</div>
+                <span class="pattern-indicator">P2</span>
+                <pre>def firstBadVersion(n):
+    left, right = 1, n
+    while left < right:
+        mid = (left + right) // 2
+        # 🎯 Converge to first bad
+        if isBadVersion(mid):
+            right = mid
+        else:
+            left = mid + 1
+    return left</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">11. Sqrt(x) - Floor</div>
+                <span class="pattern-indicator">P1</span>
+                <pre>def mySqrt(x):
+    left, right = 0, x
+    while left <= right:
+        mid = (left + right) // 2
+        if mid * mid == x: return mid
+        elif mid * mid < x: left = mid + 1
+        else: right = mid - 1
+    return right  # 🎯 Floor of sqrt</pre>
+                <div class="complexity">Time: O(log n) | Space: O(1)</div>
+            </div>
+            
+            <div class="problem-card avoid-break">
+                <div class="problem-title">12. Find Duplicate (Counting)</div>
+                <span class="pattern-indicator">P2</span>
+                <pre>def findDuplicate(nums):
+    left, right = 1, len(nums) - 1
+    while left < right:
+        mid = (left + right) // 2
+        # 🎯 Count numbers <= mid
+        count = sum(1 for num in nums if num <= mid)
+        if count > mid:
+            right = mid
+        else:
+            left = mid + 1
+    return left</pre>
+                <div class="complexity">Time: O(n log n) | Space: O(1)</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section avoid-break">
+        <h2>⚠️ Critical Pitfalls & Solutions</h2>
+        <div class="two-column">
+            <div class="column">
+                <div class="template-box">
+                    <h3>❌ Infinite Loop Trap</h3>
+                    <pre>// WRONG - Infinite loop risk
+while left <= right:
+    mid = (left + right) // 2
+    if condition:
+        right = mid  // 🚨 Dangerous!
+    else:
+        left = mid + 1
+
+// ✅ CORRECT - Safe convergence
+while left < right:
+    mid = (left + right) // 2
+    if condition:
+        right = mid  // ✅ Safe
+    else:
+        left = mid + 1</pre>
+                </div>
+            </div>
+            <div class="column">
+                <div class="template-box">
+                    <h3>❌ Lost Answer Trap</h3>
+                    <pre>// WRONG - Can eliminate answer
+if nums[mid] >= target:
+    right = mid - 1  // 🚨 Lost answer!
+
+// ✅ CORRECT - Keep potential answer
+if nums[mid] >= target:
+    result = mid
+    right = mid - 1  // ✅ Store first</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section avoid-break">
+        <h2>🎨 Pattern Recognition Matrix</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Problem Type</th>
+                        <th>Pattern</th>
+                        <th>Loop</th>
+                        <th>Key Strategy</th>
+                        <th>Return Value</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Exact Search</td>
+                        <td>P1</td>
+                        <td>left <= right</td>
+                        <td>Eliminate completely</td>
+                        <td>index or -1</td>
+                        <td>Binary Search</td>
+                    </tr>
+                    <tr>
+                        <td>Insert Position</td>
+                        <td>P1</td>
+                        <td>left <= right</td>
+                        <td>Return left after loop</td>
+                        <td>left</td>
+                        <td>Search Insert</td>
+                    </tr>
+                    <tr>
+                        <td>First/Last Occurrence</td>
+                        <td>P1</td>
+                        <td>left <= right</td>
+                        <td>Store result, continue</td>
+                        <td>result</td>
+                        <td>Find First/Last</td>
+                    </tr>
+                    <tr>
+                        <td>Ceiling/Floor</td>
+                        <td>P1</td>
+                        <td>left <= right</td>
+                        <td>Store result, continue</td>
+                        <td>result</td>
+                        <td>Upper/Lower Bound</td>
+                    </tr>
+                    <tr>
+                        <td>Rotated Minimum</td>
+                        <td>P2</td>
+                        <td>left < right</td>
+                        <td>Compare with right</td>
+                        <td>nums[left]</td>
+                        <td>Find Min Rotated</td>
+                    </tr>
+                    <tr>
+                        <td>Peak Finding</td>
+                        <td>P2</td>
+                        <td>left < right</td>
+                        <td>Follow the slope</td>
+                        <td>left</td>
+                        <td>Find Peak</td>
+                    </tr>
+                    <tr>
+                        <td>Boundary Search</td>
+                        <td>P2</td>
+                        <td>left < right</td>
+                        <td>Converge to boundary</td>
+                        <td>left</td>
+                        <td>First Bad Version</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <div class="tips avoid-break">
+        <h3>💡 Master Tips for Binary Search Success</h3>
+        <ul>
+            <li><strong>🎯 Pattern Recognition:</strong> P1 for exact search, P2 for position finding</li>
+            <li><strong>🔄 Loop Invariant:</strong> Always maintain what you're searching for in [left, right]</li>
+            <li><strong>🎨 Visualization:</strong> Draw the array, mark left/right/mid positions</li>
+            <li><strong>⚡ Edge Cases:</strong> Empty array, single element, target at boundaries</li>
+            <li><strong>🛡️ Overflow Protection:</strong> Use left + (right - left) // 2 for huge arrays</li>
+            <li><strong>🎪 Template Mastery:</strong> Practice templates until they're muscle memory</li>
+            <li><strong>🚨 Debug Strategy:</strong> Check mid calculation, boundary updates, termination</li>
+        </ul>
+    </div>
+    
+    <div class="section avoid-break">
+        <h2>🚀 Master Templates - Copy & Adapt</h2>
+        <div class="problems-grid">
+            <div class="problem-card">
+                <div class="problem-title">Template 1: Find Exact Target</div>
+                <pre>left, right = 0, len(nums) - 1
+while left <= right:
+    mid = (left + right) // 2
+    if nums[mid] == target: return mid
+    elif nums[mid] < target: left = mid + 1
+    else: right = mid - 1
+return -1</pre>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-title">Template 2: Find Boundary Position</div>
+                <pre>left, right = 0, len(nums) - 1
+while left < right:
+    mid = (left + right) // 2
+    if condition(nums[mid]):
+        right = mid
+    else:
+        left = mid + 1
+return left</pre>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-title">Template 3: Find First/Last Occurrence</div>
+                <pre>left, right = 0, len(nums) - 1
+result = -1
+while left <= right:
+    mid = (left + right) // 2
+    if nums[mid] == target:
+        result = mid
+        # First: right = mid - 1
+        # Last: left = mid + 1
+    elif nums[mid] < target: left = mid + 1
+    else: right = mid - 1
+return result</pre>
+            </div>
+            
+            <div class="problem-card">
+                <div class="problem-title">Template 4: Find Ceiling/Floor</div>
+                <pre>left, right = 0, len(nums) - 1
+result = -1
+while left <= right:
+    mid = (left + right) // 2
+    if nums[mid] >= target:  # >= for ceiling, <= for floor
+        result = mid
+        right = mid - 1      # left = mid + 1 for floor
+    else:
+        left = mid + 1       # right = mid - 1 for floor
+return result</pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section avoid-break">
+        <h2>🎯 LeetCode Problem Categories</h2>
+        <div class="two-column">
+            <div class="column">
+                <div class="template-box">
+                    <h3>Pattern 1 Problems (left <= right)</h3>
+                    <ul>
+                        <li>704. Binary Search ⭐</li>
+                        <li>35. Search Insert Position ⭐</li>
+                        <li>34. Find First and Last Position ⭐⭐</li>
+                        <li>33. Search in Rotated Sorted Array ⭐⭐</li>
+                        <li>81. Search in Rotated Sorted Array II ⭐⭐⭐</li>
+                        <li>69. Sqrt(x) ⭐</li>
+                        <li>367. Valid Perfect Square ⭐</li>
+                        <li>374. Guess Number Higher or Lower ⭐</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column">
+                <div class="template-box">
+                    <h3>Pattern 2 Problems (left < right)</h3>
+                    <ul>
+                        <li>153. Find Minimum in Rotated Sorted Array ⭐⭐</li>
+                        <li>154. Find Minimum in Rotated Sorted Array II ⭐⭐⭐</li>
+                        <li>162. Find Peak Element ⭐⭐</li>
+                        <li>278. First Bad Version ⭐</li>
+                        <li>287. Find the Duplicate Number ⭐⭐</li>
+                        <li>852. Peak Index in a Mountain Array ⭐</li>
+                        <li>1095. Find in Mountain Array ⭐⭐⭐</li>
+                        <li>4. Median of Two Sorted Arrays 

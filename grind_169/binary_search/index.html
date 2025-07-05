@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Binary Search Guide</title>
+    <!-- Chosen Palette: "Soothing Neutrals" (slate, stone, sky) -->
+    <!-- Application Structure Plan: A single-page application with a sticky side navigation on the left and scrollable content on the right. This structure is chosen for its excellent navigability, allowing users to easily jump between foundational concepts, specific problem patterns, and the final cheatsheet without losing context. The interactive design aims to transform passive reading into active learning. Key interactions include step-by-step animations of pointer movements, interactive code visualizers for each major pattern, and a clickable decision tree to guide problem-solving. This is more effective for algorithm comprehension than a linear document. -->
+    <!-- Visualization & Content Choices: The report's content is broken down into logical, interactive sections.
+        - Loop Logic (Inform/Compare): Visualized with animated HTML divs representing array elements and pointers. This is better than a chart for showing discrete pointer steps. Interaction via 'Next Step' buttons. Justification: Makes abstract pointer logic tangible.
+        - Ultimate Template (Explain/Organize): A Chart.js bar chart visualizes the monotonic F...T landscape. Interaction via a 'Run' button. Justification: A chart effectively shows the conceptual search space.
+        - Problem Patterns (Explore/Apply): Each pattern gets a dedicated interactive module with input fields and visual outputs using HTML/CSS/JS. Interaction via 'Search' buttons. Justification: Allows hands-on practice, the best way to learn algorithms.
+        - Cheatsheet (Synthesize/Review): Transformed into an interactive decision tree and a checklist. Interaction via clicks/checkboxes. Justification: Reinforces the mental model for problem classification.
+        - Library/Method: Chart.js for the conceptual landscape chart; Vanilla JS and Tailwind for all other visualizations, layouts, and interactions. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .nav-link { transition: all 0.2s ease-in-out; }
+        .nav-link.active { color: #0284c7; border-left-color: #0284c7; font-weight: 600; }
+        .nav-link:not(.active) { border-left-color: transparent; }
+        .code-block { background-color: #1e293b; color: #e2e8f0; font-family: 'Courier New', Courier, monospace; }
+        .array-cell { display: inline-flex; justify-content: center; align-items: center; width: 40px; height: 40px; border: 1px solid #94a3b8; font-weight: 500; margin: 2px; border-radius: 0.25rem; position: relative; }
+        .pointer-label { position: absolute; bottom: -20px; font-size: 0.75rem; font-weight: 600; }
+        .chart-container { position: relative; height: 250px; max-height: 300px; width: 100%; max-width: 700px; margin: auto; }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <div class="max-w-screen-xl mx-auto">
+        <div class="flex flex-col md:flex-row">
+            <!-- Sticky Sidebar Navigation -->
+            <aside class="w-full md:w-64 lg:w-72 md:sticky md:top-0 md:h-screen p-4 md:p-6 lg:p-8 border-b md:border-b-0 md:border-r border-slate-200">
+                <h1 class="text-xl lg:text-2xl font-bold text-sky-700 mb-6">Binary Search Guide</h1>
+                <nav id="sidebar-nav" class="flex flex-row md:flex-col gap-2 md:gap-1 overflow-x-auto pb-4 md:pb-0">
+                    <a href="#introduction" class="nav-link text-slate-600 hover:text-sky-700 p-2 border-l-4 text-sm lg:text-base">Introduction</a>
+                    <a href="#core-concepts" class="nav-link text-slate-600 hover:text-sky-700 p-2 border-l-4 text-sm lg:text-base">Core Concepts</a>
+                    <a href="#ultimate-template" class="nav-link text-slate-600 hover:text-sky-700 p-2 border-l-4 text-sm lg:text-base">The Ultimate Template</a>
+                    <a href="#patterns" class="nav-link text-slate-600 hover:text-sky-700 p-2 border-l-4 text-sm lg:text-base">Problem Patterns</a>
+                    <a href="#cheatsheet" class="nav-link text-slate-600 hover:text-sky-700 p-2 border-l-4 text-sm lg:text-base">Interactive Cheatsheet</a>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="flex-1 p-4 md:p-6 lg:p-10">
+                
+                <!-- Section: Introduction -->
+                <section id="introduction" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">From Confusion to Confidence</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Binary search is elegant in concept but notoriously tricky in practice. Subtle choices like loop conditions (`<` vs `<=`) or pointer updates (`mid` vs `mid-1`) can lead to bugs or infinite loops. This guide moves beyond memorization to build a deep, intuitive understanding. We'll explore the core logic, deconstruct powerful templates, and practice with interactive visualizations, turning theory into skill.
+                    </p>
+                </section>
+
+                <!-- Section: Core Concepts -->
+                <section id="core-concepts" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Anatomy of a Flawless Search</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        The key to bug-free binary search is understanding the "loop invariant"—a rule that must hold true every iteration. Your choice of loop condition and pointer updates must work together to maintain this rule and guarantee progress. Let's visualize the two most common approaches.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Visualizer 1: Inclusive Search -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-2">The Inclusive Search: `while (left <= right)`</h3>
+                            <p class="text-sm text-slate-500 mb-4">Invariant: Answer is in `[left, right]`. Best for finding an exact match you can return from inside the loop.</p>
+                            <div id="vis-inclusive-search" class="text-center mb-4 min-h-[80px]"></div>
+                            <div class="flex justify-center items-center gap-4">
+                                <button id="inclusive-reset" class="px-4 py-2 text-sm font-semibold bg-slate-200 text-slate-700 rounded-md hover:bg-slate-300">Reset</button>
+                                <button id="inclusive-step" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Next Step</button>
+                            </div>
+                            <p id="inclusive-log" class="text-center text-sm text-slate-500 mt-3 h-5"></p>
+                        </div>
+                        <!-- Visualizer 2: Convergent Search -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-2">The Convergent Search: `while (left < right)`</h3>
+                            <p class="text-sm text-slate-500 mb-4">Invariant: Answer is in `[left, right)`. The loop converges pointers to a single candidate. Best for bound-finding.</p>
+                            <div id="vis-convergent-search" class="text-center mb-4 min-h-[80px]"></div>
+                            <div class="flex justify-center items-center gap-4">
+                                <button id="convergent-reset" class="px-4 py-2 text-sm font-semibold bg-slate-200 text-slate-700 rounded-md hover:bg-slate-300">Reset</button>
+                                <button id="convergent-step" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Next Step</button>
+                            </div>
+                            <p id="convergent-log" class="text-center text-sm text-slate-500 mt-3 h-5"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section: Ultimate Template -->
+                <section id="ultimate-template" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">The "Ultimate" Generalized Template</h2>
+                    <p class="text-slate-600 leading-relaxed mb-6">
+                        Many advanced problems can be reframed into a standard form: "Minimize `k`, such that `condition(k)` is True." This creates a conceptual boolean array like `...FFFFFTTTT...`, where binary search can efficiently find the first `T`. The key is defining the monotonic `condition` function. Press "Run" to see how the search hones in on the first `True` value.
+                    </p>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                         <div class="chart-container">
+                             <canvas id="ultimate-template-chart"></canvas>
+                         </div>
+                         <div class="text-center mt-4">
+                             <button id="run-ultimate-template" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Run Visualization</button>
+                         </div>
+                    </div>
+                </section>
+
+
+                <!-- Section: Problem Patterns -->
+                <section id="patterns" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">A Framework of Problem Patterns</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        Most interview questions fall into one of four patterns. Recognizing the pattern is the key to quickly building a correct solution. Explore each pattern below with its own interactive visualizer.
+                    </p>
+                    <div class="bg-white p-2 sm:p-4 rounded-lg shadow-md">
+                        <div class="border-b border-slate-200">
+                            <nav id="pattern-tabs" class="flex flex-wrap -mb-px" aria-label="Tabs">
+                                <!-- Tabs will be injected here -->
+                            </nav>
+                        </div>
+                        <div id="pattern-content" class="pt-6">
+                            <!-- Content will be injected here -->
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Section: Interactive Cheatsheet -->
+                <section id="cheatsheet" class="mb-16">
+                    <h2 class="text-3xl font-bold mb-4">Interactive Interview Cheatsheet</h2>
+                    <p class="text-slate-600 leading-relaxed mb-8">
+                        Use these tools to practice your decision-making process before an interview. Start with the decision tree to classify a problem, then run through the pre-flight checklist.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Decision Tree -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Problem Decision Tree</h3>
+                            <div id="decision-tree">
+                                <!-- JS will populate this -->
+                            </div>
+                        </div>
+                        <!-- Pre-flight Checklist -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="font-bold text-lg mb-4">Pre-flight Checklist</h3>
+                            <div class="space-y-3">
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Correctly initialized `left` and `right`?</label>
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Used overflow-safe `mid` calculation?</label>
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Loop condition matches pointer updates?</label>
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Checked for infinite loops (2-element case)?</label>
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Handled termination and return value correctly?</label>
+                                <label class="flex items-center"><input type="checkbox" class="h-4 w-4 rounded border-gray-300 text-sky-600 focus:ring-sky-500 mr-3"> Considered edge cases (empty, single-element)?</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- UTILITY FUNCTIONS ---
+    function createArrayVis(container, arr) {
+        container.innerHTML = '';
+        arr.forEach((val, i) => {
+            const cell = document.createElement('div');
+            cell.className = 'array-cell bg-white';
+            cell.textContent = val;
+            cell.id = `${container.id}-cell-${i}`;
+            
+            const indexLabel = document.createElement('div');
+            indexLabel.className = 'absolute -top-5 text-xs text-slate-400';
+            indexLabel.textContent = i;
+            cell.appendChild(indexLabel);
+            
+            const pointerContainer = document.createElement('div');
+            pointerContainer.id = `${container.id}-ptr-${i}`;
+            cell.appendChild(pointerContainer);
+            
+            container.appendChild(cell);
+        });
+    }
+    
+    function updatePointers(visId, left, right, mid = -1) {
+        const cells = document.querySelectorAll(`[id^="${visId}-cell-"]`);
+        cells.forEach((cell, i) => {
+            const ptrContainer = document.getElementById(`${visId}-ptr-${i}`);
+            ptrContainer.innerHTML = '';
+            
+            if (i === left) {
+                const p = document.createElement('div');
+                p.className = 'pointer-label text-sky-600';
+                p.innerHTML = 'L';
+                ptrContainer.appendChild(p);
+            }
+            if (i === right) {
+                const p = document.createElement('div');
+                p.className = 'pointer-label text-red-600';
+                p.innerHTML = 'R';
+                ptrContainer.appendChild(p);
+            }
+            if(i === mid) {
+                cell.classList.add('bg-yellow-200');
+            } else {
+                 cell.classList.remove('bg-yellow-200');
+            }
+        });
+    }
+
+    // --- SIDEBAR NAVIGATION ---
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('section');
+
+    function updateActiveLink() {
+        let index = sections.length;
+        while (--index && window.scrollY + 100 < sections[index].offsetTop) {}
+        navLinks.forEach((link) => link.classList.remove('active'));
+        if(navLinks[index]) navLinks[index].classList.add('active');
+    }
+    window.addEventListener('scroll', updateActiveLink);
+    updateActiveLink();
+
+    // --- CORE CONCEPTS VISUALIZERS ---
+    const inclusiveVis = {
+        container: document.getElementById('vis-inclusive-search'),
+        log: document.getElementById('inclusive-log'),
+        stepBtn: document.getElementById('inclusive-step'),
+        resetBtn: document.getElementById('inclusive-reset'),
+        arr: [2, 5, 7, 8, 11, 12],
+        target: 11,
+        state: {}
+    };
+
+    const convergentVis = {
+        container: document.getElementById('vis-convergent-search'),
+        log: document.getElementById('convergent-log'),
+        stepBtn: document.getElementById('convergent-step'),
+        resetBtn: document.getElementById('convergent-reset'),
+        arr: [5, 7, 7, 8, 8, 10],
+        target: 8, // find first occurrence
+        state: {}
+    };
+
+    function resetVis(vis) {
+        vis.state = {
+            left: 0,
+            right: vis.arr.length - 1,
+            mid: -1,
+            log: '',
+            finished: false
+        };
+        if(vis === convergentVis) vis.state.right = vis.arr.length;
+
+        createArrayVis(vis.container, vis.arr);
+        updatePointers(vis.container.id, vis.state.left, vis.state.right);
+        vis.log.textContent = vis === inclusiveVis ? `Searching for ${vis.target}` : `Find first element >= ${vis.target}`;
+    }
+
+    function stepInclusive() {
+        const { state, arr, target, log, container } = inclusiveVis;
+        if (state.finished) return;
+
+        if (state.left <= state.right) {
+            state.mid = state.left + Math.floor((state.right - state.left) / 2);
+            log.textContent = `mid = ${state.mid}. nums[${state.mid}] is ${arr[state.mid]}`;
+            updatePointers(container.id, state.left, state.right, state.mid);
+
+            setTimeout(() => {
+                if (arr[state.mid] === target) {
+                    log.textContent = `Target found at index ${state.mid}!`;
+                    state.finished = true;
+                } else if (arr[state.mid] < target) {
+                    log.textContent += `. Too small. Updating left = mid + 1`;
+                    state.left = state.mid + 1;
+                } else {
+                    log.textContent += `. Too large. Updating right = mid - 1`;
+                    state.right = state.mid - 1;
+                }
+                updatePointers(container.id, state.left, state.right);
+            }, 1000);
+        } else {
+            log.textContent = 'Search space empty. Target not found.';
+            state.finished = true;
+        }
+    }
+
+    function stepConvergent() {
+        const { state, arr, target, log, container } = convergentVis;
+        if (state.finished) return;
+
+        if (state.left < state.right) {
+            state.mid = state.left + Math.floor((state.right - state.left) / 2);
+            log.textContent = `mid = ${state.mid}. nums[${state.mid}] is ${arr[state.mid]}`;
+            updatePointers(container.id, state.left, state.right, state.mid);
+
+            setTimeout(() => {
+                if (arr[state.mid] >= target) {
+                    log.textContent += `. Valid candidate. Updating right = mid`;
+                    state.right = state.mid;
+                } else {
+                    log.textContent += `. Too small. Updating left = mid + 1`;
+                    state.left = state.mid + 1;
+                }
+                updatePointers(container.id, state.left, state.right);
+            }, 1000);
+        } else {
+            log.textContent = `Loop finished. Pointers converged at index ${state.left}.`;
+            state.finished = true;
+        }
+    }
+
+    inclusiveVis.stepBtn.addEventListener('click', stepInclusive);
+    inclusiveVis.resetBtn.addEventListener('click', () => resetVis(inclusiveVis));
+    convergentVis.stepBtn.addEventListener('click', stepConvergent);
+    convergentVis.resetBtn.addEventListener('click', () => resetVis(convergentVis));
+
+    resetVis(inclusiveVis);
+    resetVis(convergentVis);
+    
+    // --- ULTIMATE TEMPLATE CHART ---
+    const ultimateTemplateCtx = document.getElementById('ultimate-template-chart').getContext('2d');
+    let ultimateTemplateChart;
+    const ultimateData = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1];
+    
+    function createUltimateChart() {
+        if (ultimateTemplateChart) ultimateTemplateChart.destroy();
+        ultimateTemplateChart = new Chart(ultimateTemplateCtx, {
+            type: 'bar',
+            data: {
+                labels: ultimateData.map((_, i) => i),
+                datasets: [{
+                    label: 'condition(k)',
+                    data: ultimateData,
+                    backgroundColor: ultimateData.map(v => v === 0 ? 'rgba(252, 165, 165, 0.6)' : 'rgba(110, 231, 183, 0.6)'),
+                    borderColor: ultimateData.map(v => v === 0 ? 'rgba(239, 68, 68, 1)' : 'rgba(16, 185, 129, 1)'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    title: { display: true, text: '...FFFFFTTTT... Landscape' }
+                },
+                scales: {
+                    y: { beginAtZero: true, display: false },
+                    x: { grid: { display: false } }
+                },
+                animation: { duration: 200 }
+            }
+        });
+    }
+
+    document.getElementById('run-ultimate-template').addEventListener('click', () => {
+        let left = 0;
+        let right = ultimateData.length - 1;
+        let iteration = 0;
+
+        const highlight = (l, r, m) => {
+            ultimateTemplateChart.data.datasets[0].borderColor = ultimateData.map((_, i) => {
+                if(i === m) return '#facc15';
+                if(i === l || i === r) return '#3b82f6';
+                return 'rgba(107, 114, 128, 0.5)';
+            });
+            ultimateTemplateChart.data.datasets[0].borderWidth = ultimateData.map((_, i) => (i === m || i === l || i === r) ? 3 : 1);
+            ultimateTemplateChart.update();
+        }
+
+        const searchStep = () => {
+            if (left >= right) {
+                 setTimeout(()=> {
+                    ultimateTemplateChart.data.datasets[0].borderColor = ultimateData.map((_, i) => i === left ? '#10b981' : 'rgba(107, 114, 128, 0.5)');
+                    ultimateTemplateChart.data.datasets[0].borderWidth = ultimateData.map((_, i) => i === left ? 4 : 1);
+                    ultimateTemplateChart.options.plugins.title.text = `Found first True at index ${left}`;
+                    ultimateTemplateChart.update();
+                }, 1000);
+                return;
+            }
+
+            let mid = left + Math.floor((right - left) / 2);
+            highlight(left, right, mid);
+            
+            setTimeout(() => {
+                if (ultimateData[mid] === 1) {
+                    right = mid;
+                } else {
+                    left = mid + 1;
+                }
+                searchStep();
+            }, 1200);
+        };
+        
+        createUltimateChart();
+        setTimeout(searchStep, 500);
+    });
+    
+    createUltimateChart();
+
+    // --- PROBLEM PATTERNS ---
+    const patternsData = {
+        'exact-match': {
+            title: 'Exact Match',
+            description: 'The simplest case: find a target in a sorted array. The classic `while (left <= right)` loop is perfect here, as you can return the index as soon as you find it.',
+            code: `def search(nums, target):
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = l + (r - l) // 2
+        if nums[mid] == target: return mid
+        elif nums[mid] < target: l = mid + 1
+        else: r = mid - 1
+    return -1`,
+            visualizer: `
+                <p class="text-sm text-center mb-2">Array: [2, 5, 7, 8, 11, 12, 15]</p>
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <input type="number" id="exact-match-input" placeholder="Target" class="w-24 p-2 border rounded">
+                    <button id="exact-match-btn" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Search</button>
+                </div>
+                <div id="vis-exact-match" class="text-center mb-4 min-h-[80px]"></div>
+                <p id="exact-match-log" class="text-center text-sm text-slate-500 mt-3 h-5"></p>`
+        },
+        'bound-search': {
+            title: 'Bound Searching',
+            description: 'Find the first or last occurrence of an element in an array with duplicates. This uses the "Minimize k" template (`while (left < right)`) to find the boundary.',
+            code: `def find_first(nums, target):
+    l, r = 0, len(nums)
+    while l < r:
+        mid = l + (r - l) // 2
+        if nums[mid] >= target: r = mid
+        else: l = mid + 1
+    return l`,
+            visualizer: `
+                <p class="text-sm text-center mb-2">Array: [5, 7, 7, 8, 8, 8, 10]</p>
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <input type="number" id="bound-search-input" placeholder="Target" class="w-24 p-2 border rounded">
+                    <button id="bound-search-btn" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Find First</button>
+                </div>
+                <div id="vis-bound-search" class="text-center mb-4 min-h-[80px]"></div>
+                <p id="bound-search-log" class="text-center text-sm text-slate-500 mt-3 h-5"></p>`
+        },
+        'rotated-array': {
+            title: 'Rotated Sorted Array',
+            description: 'Search in a sorted array that has been rotated. The key is that at any `mid`, one half of the array `[left...mid]` or `[mid...right]` must be sorted. You use this fact to narrow the search.',
+            code: `def search(nums, target):
+    l, r = 0, len(nums) - 1
+    while l <= r:
+        mid = l + (r - l) // 2
+        if nums[mid] == target: return mid
+        # Left half is sorted
+        if nums[l] <= nums[mid]:
+            if nums[l] <= target < nums[mid]: r = mid - 1
+            else: l = mid + 1
+        # Right half is sorted
+        else:
+            if nums[mid] < target <= nums[r]: l = mid + 1
+            else: r = mid - 1
+    return -1`,
+            visualizer: `
+                <p class="text-sm text-center mb-2">Array: [9, 11, 13, 1, 3, 5, 7]</p>
+                <div class="flex justify-center items-center gap-2 mb-4">
+                    <input type="number" id="rotated-input" placeholder="Target" class="w-24 p-2 border rounded">
+                    <button id="rotated-btn" class="px-4 py-2 text-sm font-semibold bg-sky-600 text-white rounded-md hover:bg-sky-700">Search</button>
+                </div>
+                <div id="vis-rotated" class="text-center mb-4 min-h-[80px]"></div>
+                <p id="rotated-log" class="text-center text-sm text-slate-500 mt-3 h-5"></p>`
+        },
+    };
+    
+    const patternTabsContainer = document.getElementById('pattern-tabs');
+    const patternContentContainer = document.getElementById('pattern-content');
+    let activeTab = 'exact-match';
+
+    function renderPatterns() {
+        patternTabsContainer.innerHTML = '';
+        Object.keys(patternsData).forEach(key => {
+            const data = patternsData[key];
+            const tab = document.createElement('a');
+            tab.href = '#';
+            tab.dataset.tab = key;
+            tab.className = `pattern-tab-link shrink-0 border-b-2 font-medium text-sm p-4 ${
+                key === activeTab 
+                ? 'border-sky-500 text-sky-600' 
+                : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+            }`;
+            tab.textContent = data.title;
+            patternTabsContainer.appendChild(tab);
+        });
+
+        const activeData = patternsData[activeTab];
+        patternContentContainer.innerHTML = `
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-semibold text-lg mb-2">${activeData.title}</h4>
+                    <p class="text-slate-600 text-sm mb-4">${activeData.description}</p>
+                    <pre class="code-block p-4 rounded-md text-sm overflow-x-auto"><code>${activeData.code}</code></pre>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    ${activeData.visualizer}
+                </div>
+            </div>`;
+        addPatternEventListeners();
+    }
+    
+    patternTabsContainer.addEventListener('click', e => {
+        e.preventDefault();
+        if (e.target.matches('.pattern-tab-link')) {
+            activeTab = e.target.dataset.tab;
+            renderPatterns();
+        }
+    });
+
+    function addPatternEventListeners() {
+        if (activeTab === 'exact-match') {
+            const btn = document.getElementById('exact-match-btn');
+            btn.onclick = () => {
+                const arr = [2, 5, 7, 8, 11, 12, 15];
+                const input = document.getElementById('exact-match-input');
+                const target = parseInt(input.value);
+                const log = document.getElementById('exact-match-log');
+                const visContainer = document.getElementById('vis-exact-match');
+                if (isNaN(target)) { log.textContent = 'Please enter a valid number.'; return; }
+                
+                let l = 0, r = arr.length - 1;
+                createArrayVis(visContainer, arr);
+                log.textContent = `Searching for ${target}`;
+                
+                const step = () => {
+                    if (l > r) {
+                        log.textContent = `Target ${target} not found.`;
+                        updatePointers(visContainer.id, l, r);
+                        return;
+                    }
+                    let mid = l + Math.floor((r-l)/2);
+                    log.textContent = `l=${l}, r=${r}, mid=${mid}`;
+                    updatePointers(visContainer.id, l, r, mid);
+
+                    setTimeout(() => {
+                        if (arr[mid] === target) {
+                            log.textContent = `Found ${target} at index ${mid}!`;
+                            visContainer.querySelector(`#${visContainer.id}-cell-${mid}`).classList.add('bg-green-300');
+                        } else if (arr[mid] < target) {
+                            l = mid + 1;
+                            step();
+                        } else {
+                            r = mid - 1;
+                            step();
+                        }
+                    }, 1200);
+                };
+                step();
+            };
+        }
+        if (activeTab === 'bound-search') {
+            const btn = document.getElementById('bound-search-btn');
+            btn.onclick = () => {
+                const arr = [5, 7, 7, 8, 8, 8, 10];
+                const input = document.getElementById('bound-search-input');
+                const target = parseInt(input.value);
+                const log = document.getElementById('bound-search-log');
+                const visContainer = document.getElementById('vis-bound-search');
+                if (isNaN(target)) { log.textContent = 'Please enter a valid number.'; return; }
+
+                let l = 0, r = arr.length;
+                createArrayVis(visContainer, arr);
+                log.textContent = `Finding first element >= ${target}`;
+
+                const step = () => {
+                     if (l >= r) {
+                        log.textContent = `Search ended. Lower bound is at index ${l}.`;
+                        updatePointers(visContainer.id, l, r);
+                        visContainer.querySelector(`#${visContainer.id}-cell-${l}`)?.classList.add('bg-green-300');
+                        return;
+                    }
+                    let mid = l + Math.floor((r-l)/2);
+                    log.textContent = `l=${l}, r=${r}, mid=${mid}`;
+                    updatePointers(visContainer.id, l, r, mid);
+
+                    setTimeout(() => {
+                        if (arr[mid] >= target) {
+                            r = mid;
+                        } else {
+                            l = mid + 1;
+                        }
+                        step();
+                    }, 1200);
+                }
+                step();
+            };
+        }
+        if (activeTab === 'rotated-array') {
+            const btn = document.getElementById('rotated-btn');
+            btn.onclick = () => {
+                 const arr = [9, 11, 13, 1, 3, 5, 7];
+                const input = document.getElementById('rotated-input');
+                const target = parseInt(input.value);
+                const log = document.getElementById('rotated-log');
+                const visContainer = document.getElementById('vis-rotated');
+                if (isNaN(target)) { log.textContent = 'Please enter a valid number.'; return; }
+
+                let l = 0, r = arr.length - 1;
+                createArrayVis(visContainer, arr);
+                log.textContent = `Searching for ${target}`;
+
+                const step = () => {
+                    if (l > r) {
+                        log.textContent = `Target ${target} not found.`;
+                        updatePointers(visContainer.id, l, r);
+                        return;
+                    }
+                    let mid = l + Math.floor((r - l) / 2);
+                    log.textContent = `l=${l}, r=${r}, mid=${mid}.`;
+                    updatePointers(visContainer.id, l, r, mid);
+
+                    setTimeout(() => {
+                        if (arr[mid] === target) {
+                            log.textContent = `Found ${target} at index ${mid}!`;
+                            visContainer.querySelector(`#${visContainer.id}-cell-${mid}`).classList.add('bg-green-300');
+                            return;
+                        }
+
+                        if (arr[l] <= arr[mid]) { // Left half sorted
+                            log.textContent += ` Left half [${l}..${mid}] is sorted.`;
+                            if (arr[l] <= target && target < arr[mid]) {
+                                r = mid - 1;
+                            } else {
+                                l = mid + 1;
+                            }
+                        } else { // Right half sorted
+                            log.textContent += ` Right half [${mid}..${r}] is sorted.`;
+                            if (arr[mid] < target && target <= arr[r]) {
+                                l = mid + 1;
+                            } else {
+                                r = mid - 1;
+                            }
+                        }
+                        step();
+                    }, 1500);
+                }
+                step();
+            };
+        }
+    }
+    
+    renderPatterns();
+
+    // --- DECISION TREE ---
+    const decisionTreeContainer = document.getElementById('decision-tree');
+    const tree = {
+        question: 'Is the search space sorted or monotonic?',
+        yes: {
+            question: 'What is the search space?',
+            options: {
+                'An array/list': {
+                    question: 'What is the goal?',
+                    options: {
+                        'Find an exact match': 'Use Pattern 1: Exact Match Search',
+                        'Find a boundary (first/last)': 'Use Pattern 2: Bound Searching',
+                        'Array is modified (rotated, etc.)': 'Use Pattern 3: Modified Search Space'
+                    }
+                },
+                'A range of possible answers': 'Use Pattern 4: Binary Search on the Answer'
+            }
+        },
+        no: 'Binary Search does not apply.'
+    };
+
+    function createTreeView(node, container) {
+        container.innerHTML = '';
+        const q = document.createElement('p');
+        q.className = 'font-semibold mb-3';
+        q.textContent = node.question;
+        container.appendChild(q);
+        
+        if (node.options) {
+            const optsContainer = document.createElement('div');
+            optsContainer.className = 'flex flex-col items-start gap-2';
+            Object.keys(node.options).forEach(key => {
+                const btn = document.createElement('button');
+                btn.className = 'text-left text-sm p-2 bg-slate-100 hover:bg-slate-200 rounded-md w-full';
+                btn.textContent = key;
+                btn.onclick = () => {
+                    const nextNode = node.options[key];
+                    if (typeof nextNode === 'string') {
+                        container.innerHTML = `<p class="font-semibold mb-3 text-sky-700">${nextNode}</p><button id="tree-reset" class="text-sm p-2 bg-slate-200 rounded-md">Start Over</button>`;
+                        document.getElementById('tree-reset').onclick = () => createTreeView(tree, decisionTreeContainer);
+                    } else {
+                        createTreeView(nextNode, container);
+                    }
+                };
+                optsContainer.appendChild(btn);
+            });
+            container.appendChild(optsContainer);
+        } else {
+             const btn = document.createElement('button');
+             btn.className = 'text-left text-sm p-2 bg-slate-100 hover:bg-slate-200 rounded-md';
+             btn.textContent = 'Start Over';
+             btn.onclick = () => createTreeView(tree, decisionTreeContainer);
+             container.appendChild(btn);
+        }
+    }
+
+    createTreeView(tree, decisionTreeContainer);
+});
+</script>
+
+</body>
+</html>

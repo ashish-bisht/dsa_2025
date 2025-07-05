@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Printable Binary Search Guide (Full Version)</title>
+    <!-- Optimized for Epson L3252: Vibrant colors and sharp text -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; }
+        .code-block { 
+            background-color: #f1f5f9; /* Light slate for contrast */
+            color: #1e293b; 
+            font-family: 'Courier New', Courier, monospace; 
+            font-weight: 600; /* Bolder for sharpness */
+        }
+        .array-cell { 
+            display: inline-flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 36px; 
+            height: 36px; 
+            border: 2px solid #3b82f6; /* Bright blue border */
+            font-weight: 600; 
+            margin: 1px; 
+            border-radius: 0.25rem; 
+            position: relative; 
+            font-size: 0.875rem; 
+            background-color: #eff6ff; /* Light blue background */
+        }
+        .pointer-label { 
+            position: absolute; 
+            bottom: -18px; 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            color: #dc2626; /* Bright red for pointers */
+        }
+        .chart-container { 
+            position: relative; 
+            height: 220px; 
+            max-height: 250px; 
+            width: 100%; 
+            max-width: 600px; 
+            margin: auto; 
+        }
+        h1, h2, h3, h4 { 
+            color: #1e40af; /* Vibrant dark blue for headings */
+            font-weight: 800; /* Extra bold */
+        }
+        .key-term { 
+            font-weight: 700; 
+            color: #15803d; /* Bright green for key terms */
+        }
+        
+        @media print {
+            body { 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                font-size: 11pt; /* Larger for readability */
+                color: #1e293b; /* Dark slate for sharp text */
+            }
+            .no-print { display: none !important; }
+            main { padding: 0 !important; }
+            section { page-break-inside: avoid; }
+            .page-break-before { page-break-before: always; }
+            .bg-white, .bg-slate-50 { 
+                box-shadow: none !important; 
+                border: 2px solid #3b82f6; /* Bright blue border */
+                background-color: #f8fafc; /* Light slate */
+            }
+            h1 { font-size: 26pt; }
+            h2 { font-size: 20pt; }
+            h3 { font-size: 16pt; }
+            h4 { font-size: 14pt; }
+            .code-block { 
+                border: 1px solid #3b82f6; /* Blue border */
+                background-color: #f8fafc; 
+            }
+            .array-cell { 
+                border: 2px solid #3b82f6; 
+                background-color: #dbeafe; /* Light blue */
+            }
+            .pointer-label { color: #dc2626; } /* Vivid red */
+        }
+    </style>
+</head>
+<body class="text-slate-800">
+    <div class="no-print bg-sky-100 border-b border-sky-200 p-4 text-center text-sm text-sky-800">
+        <strong>Print-Optimized View.</strong> Use your browser's print function (Ctrl/Cmd + P) for the best result. For Epson L3252, use High Quality mode and glossy/matte paper.
+    </div>
+    <div class="max-w-4xl mx-auto">
+        <main class="flex-1 p-4 md:p-6">
+            <section id="cheatsheet" class="page-break-before mb-10">
+                <h2 class="text-2xl font-bold mb-3">1. Interview Cheatsheet</h2>
+                <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+                    Binary search presents a unique paradox. Its core concept—repeatedly halving a search space—is elegant and straightforward. Yet, in practice, it is a notorious source of bugs. The community is replete with discussions from candidates struggling with the same subtle but critical implementation details: Should the loop condition be <span class="key-term">left &lt; right</span> or <span class="key-term">left &lt;= right</span>? How should the pointers be updated—<span class="key-term">right = mid</span> or <span class="key-term">right = mid - 1</span>? Why do these seemingly minor choices lead to off-by-one errors or infinite loops?
+                    <br><br>
+                    This guide addresses these challenges not by offering yet another template to memorize, but by establishing a unified framework built from first principles. The goal is to move beyond rote learning and cultivate a deep, intuitive understanding that empowers a developer to derive the correct, bug-free implementation for any binary search problem.
+                    Use this decision tree and checklist to solidify your problem-solving process before an interview.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-base mb-3">Problem Decision Tree</h3>
+                        <div id="decision-tree" class="space-y-3 text-xs"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h3 class="font-bold text-base mb-3">Pre-flight Checklist</h3>
+                        <ul class="space-y-2 list-disc list-inside text-slate-700 text-sm">
+                            <li>Correctly initialized <span class="key-term">left</span> and <span class="key-term">right</span>?</li>
+                            <li>Used overflow-safe <span class="key-term">mid = left + (right - left) // 2</span>?</li>
+                            <li>Loop condition matches pointer updates?</li>
+                            <li>Checked for infinite loops (2-element case)?</li>
+                            <li>Handled termination and return value correctly?</li>
+                            <li>Considered edge cases (empty, single-element)?</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="core-concepts" class="mb-10 page-break-before">
+                <h2 class="text-2xl font-bold mb-3">2. The Anatomy of a Flawless Search</h2>
+                <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+                    The key to mastering binary search is to stop memorizing templates and start reasoning from foundational principles. Every correct implementation is governed by a strict internal logic. Understanding this logic eliminates guesswork and provides a reliable method for constructing bug-free code.
+                </p>
+                
+                <h3 class="text-xl font-semibold mb-3">2.1 The Loop Invariant: Your North Star</h3>
+                <p class="text-slate-600 leading-relaxed mb-4 text-sm">
+                    The single most important concept is the <span class="key-term">loop invariant</span>: a condition that holds true at the beginning of every loop iteration. It defines the relationship between the pointers (<span class="key-term">left</span>, <span class="key-term">right</span>) and the location of the potential answer. Once an invariant is established, the choices for the loop's termination condition and pointer updates become logical deductions.
+                </p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-base mb-2">The Inclusive Invariant: <span class="key-term">while (left &lt;= right)</span></h4>
+                        <p class="text-xs text-slate-500 mb-4">Invariant: Answer is in the closed interval <span class="key-term">[left, right]</span>. The loop continues as long as the space has at least one element. Best for finding an exact match.</p>
+                        <div id="vis-inclusive-search" class="text-center mb-4 min-h-[70px]"></div>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg border">
+                        <h4 class="font-bold text-base mb-2">The Convergent Invariant: <span class="key-term">while (left &lt; right)</span></h4>
+                        <p class="text-xs text-slate-500 mb-4">Invariant: Answer is in the half-open interval <span class="key-term">[left, right)</span>. The loop continues as long as there are at least two elements, converging <span class="key-term">left</span> and <span class="key-term">right</span> to a single candidate. Best for bound-finding.</p>
+                        <div id="vis-convergent-search" class="text-center mb-4 min-h-[70px]"></div>
+                    </div>
+                </div>
+
+                <h3 class="text-xl font-semibold mt-6 mb-3">2.2 Pointer Updates & Avoiding Infinite Loops</h3>
+                <p class="text-slate-600 leading-relaxed mb-4 text-sm">
+                    A binary search must guarantee progress. An infinite loop often arises from a mismatch between the <span class="key-term">midpoint</span> calculation and pointer updates in a two-element search space.
+                    <br>
+                    Consider <span class="key-term">left = 0, right = 1</span>. The standard <span class="key-term">mid = left + (right - left) // 2</span> yields <span class="key-term">mid = 0</span>.
+                    <ul class="list-disc list-inside text-sm text-slate-600 mt-2 space-y-1">
+                        <li>If your logic includes <span class="key-term">left = mid</span>, the pointers become <span class="key-term">left=0, right=1</span>. The search space has not shrunk, causing an infinite loop.</li>
+                        <li><span class="key-term">The Fix:</span> If you must use <span class="key-term">left = mid</span>, you must use a midpoint calculation that rounds up: <span class="key-term">mid = left + (right - left + 1) // 2</span>. This ensures progress.</li>
+                    </ul>
+                </p>
+            </section>
+
+            <section id="ultimate-template" class="mb-10 page-break-before">
+                <h2 class="text-2xl font-bold mb-3">3. Deconstructing the "Ultimate" Template</h2>
+                <p class="text-slate-600 leading-relaxed mb-4 text-sm">
+                    This powerful template promotes a problem-solving philosophy: transform complex requirements into a simple, searchable structure. It's designed for problems that can be framed as: <span class="key-term">"Minimize `k`, such that `condition(k)` is True."</span>
+                </p>
+                <div class="bg-white p-4 rounded-lg border mb-4">
+                    <div class="chart-container">
+                        <canvas id="ultimate-template-chart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white p-4 rounded-lg border">
+                    <h4 class="font-bold text-base mb-2">Template: Minimize <span class="key-term">k</span> (Find First True)</h4>
+                    <p class="text-slate-600 leading-relaxed mb-4 text-sm">
+                        The key is defining a <span class="key-term">monotonic</span> <span class="key-term">condition(k)</span> function that creates a conceptual boolean array like <span class="key-term">...FFFFFTTTT...</span>. The binary search then efficiently finds the first <span class="key-term">T</span>.
+                    </p>
+                    <pre class="code-block p-3 rounded-md text-xs overflow-x-auto"><code>def find_min_k(search_space):
+    def condition(value) -> bool:
+        # Monotonic function: F, F, ..., F, T, T, ...
+        # Returns True if 'value' satisfies the criteria, False otherwise.
+        pass
+
+    left, right = min(search_space), max(search_space)
+    while left < right:
+        mid = left + (right - left) // 2
+        if condition(mid):
+            # mid is a potential answer, but a smaller one might exist.
+            # Keep mid in the search space: [left, mid]
+            right = mid
+        else:
+            # mid is not a valid answer.
+            # The answer must be in [mid + 1, right].
+            left = mid + 1
+            
+    # Loop terminates when left == right, pointing to the minimal k.
+    return left</code></pre>
+                </div>
+            </section>
+
+            <section id="patterns" class="page-break-before mb-10">
+                <h2 class="text-2xl font-bold mb-3">4. A Framework of Problem Patterns</h2>
+                <p class="text-slate-600 leading-relaxed mb-6 text-sm">
+                    Most interview questions fall into one of these patterns. Recognizing the pattern is the key to a quick solution.
+                </p>
+                <div id="patterns-container" class="space-y-6"></div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // --- UTILITY FUNCTIONS ---
+        function createArrayVis(container, arr) {
+            container.innerHTML = '';
+            arr.forEach((val, i) => {
+                const cell = document.createElement('div');
+                cell.className = 'array-cell bg-white';
+                cell.textContent = val;
+                cell.id = `${container.id}-cell-${i}`;
+                
+                const indexLabel = document.createElement('div');
+                indexLabel.className = 'absolute -top-4 text-xs text-slate-400';
+                indexLabel.textContent = i;
+                cell.appendChild(indexLabel);
+                
+                const pointerContainer = document.createElement('div');
+                pointerContainer.id = `${container.id}-ptr-${i}`;
+                cell.appendChild(pointerContainer);
+                
+                container.appendChild(cell);
+            });
+        }
+        
+        function updatePointers(visId, left, right) {
+            const cells = document.querySelectorAll(`[id^="${visId}-cell-"]`);
+            cells.forEach((cell, i) => {
+                const ptrContainer = document.getElementById(`${visId}-ptr-${i}`);
+                ptrContainer.innerHTML = '';
+                
+                if (i === left) {
+                    const p = document.createElement('div');
+                    p.className = 'pointer-label text-sky-600';
+                    p.innerHTML = 'L';
+                    ptrContainer.appendChild(p);
+                }
+                if (i === right) {
+                    const p = document.createElement('div');
+                    p.className = 'pointer-label text-red-600';
+                    p.innerHTML = 'R';
+                    ptrContainer.appendChild(p);
+                }
+            });
+        }
+
+        // --- CORE CONCEPTS VISUALIZERS (STATIC) ---
+        const inclusiveVisContainer = document.getElementById('vis-inclusive-search');
+        const inclusiveArr = [2, 5, 7, 8, 11, 12];
+        createArrayVis(inclusiveVisContainer, inclusiveArr);
+        updatePointers(inclusiveVisContainer.id, 0, inclusiveArr.length - 1);
+
+        const convergentVisContainer = document.getElementById('vis-convergent-search');
+        const convergentArr = [5, 7, 7, 8, 8, 10];
+        createArrayVis(convergentVisContainer, convergentArr);
+        updatePointers(convergentVisContainer.id, 0, convergentArr.length);
+
+        // --- ULTIMATE TEMPLATE CHART (STATIC) ---
+        const ultimateTemplateCtx = document.getElementById('ultimate-template-chart').getContext('2d');
+        const ultimateData = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1];
+        new Chart(ultimateTemplateCtx, {
+            type: 'bar',
+            data: {
+                labels: ultimateData.map((_, i) => i),
+                datasets: [{
+                    label: 'condition(k)',
+                    data: ultimateData,
+                    backgroundColor: ultimateData.map(v => v === 0 ? 'rgba(239, 68, 68, 0.8)' : 'rgba(34, 197, 94, 0.8)'),
+                    borderColor: ultimateData.map(v => v === 0 ? 'rgba(220, 38, 38, 1)' : 'rgba(21, 128, 61, 1)'),
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false },
+                    title: { display: true, text: '...FFFFFTTTT... Landscape', font: {size: 10} }
+                },
+                scales: {
+                    y: { beginAtZero: true, display: false },
+                    x: { grid: { display: false }, ticks: {font: {size: 9}} }
+                },
+                animation: { duration: 0 }
+            }
+        });
+
+        // --- PROBLEM PATTERNS (STATIC) ---
+        const patternsData = {
+            'exact-match': {
+                title: 'Pattern 1: Exact Match Search',
+                description: 'Find the index of a specific <span class="key-term">target</span> value in a perfectly sorted array. The classic inclusive search (<span class="key-term">while (left <= right)</span>) is perfectly suited for this pattern as the answer can be returned from within the loop.',
+                code: `def search(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    return -1`
+            },
+            'bound-search': {
+                title: 'Pattern 2: Bound Searching',
+                description: 'Find the first or last occurrence of an element in an array with duplicates. This is a direct application of the "<span class="key-term">Minimize k</span>" template. For example, finding the first position is equivalent to "<span class="key-term">Minimize index `k` such that `nums[k] >= target`</span>".',
+                code: `def find_first(nums, target):
+    left, right = 0, len(nums)
+    while left < right:
+        mid = left + (right - left) // 2
+        if nums[mid] >= target:
+            right = mid
+        else:
+            left = mid + 1
+    return left`
+            },
+            'rotated-array': {
+                title: 'Pattern 3: Search in Rotated Sorted Array',
+                description: 'Search in a sorted array that has been rotated. The key is that for any <span class="key-term">midpoint</span>, at least one of the two halves (<span class="key-term">[left, mid]</span> or <span class="key-term">[mid, right]</span>) must be perfectly sorted. The algorithm leverages this to narrow the search.',
+                code: `def search_rotated(nums, target):
+    left, right = 0, len(nums) - 1
+    while left <= right:
+        mid = left + (right - left) // 2
+        if nums[mid] == target:
+            return mid
+        
+        # Left half is sorted
+        if nums[left] <= nums[mid]:
+            if nums[left] <= target < nums[mid]:
+                right = mid - 1
+            else:
+                left = mid + 1
+        # Right half is sorted
+        else:
+            if nums[mid] < target <= nums[right]:
+                left = mid + 1
+            else:
+                right = mid - 1
+    return -1`
+            },
+            'bs-on-answer': {
+                title: 'Pattern 4: Binary Search on the Answer',
+                description: 'For optimization problems (e.g., "<span class="key-term">minimize the maximum value</span>"). The search is performed on a range of possible answers, not array indices. The core is transforming the problem into a simpler, <span class="key-term">monotonic</span> decision question: "<span class="key-term">Is it possible to achieve a result with value X?</span>".',
+                code: `def solve_optimization(problem_params):
+    def feasible(value):
+        # Greedy check: is it possible to solve with 'value'?
+        # Returns True or False.
+        pass
+
+    left, right = min_possible_answer, max_possible_answer
+    ans = right
+    while left <= right:
+        mid = left + (right - left) // 2
+        if feasible(mid):
+            ans = mid
+            right = mid - 1
+        else:
+            left = mid + 1
+    return ans`
+            }
+        };
+        
+        const patternsContainer = document.getElementById('patterns-container');
+        Object.values(patternsData).forEach(pattern => {
+            const patternEl = document.createElement('div');
+            patternEl.className = 'p-4 bg-white rounded-lg border';
+            patternEl.innerHTML = `
+                <h4 class="font-bold text-base mb-2">${pattern.title}</h4>
+                <p class="text-slate-600 text-xs mb-3">${pattern.description}</p>
+                <pre class="code-block p-3 rounded-md text-xs overflow-x-auto"><code>${pattern.code}</code></pre>
+            `;
+            patternsContainer.appendChild(patternEl);
+        });
+
+        // --- DECISION TREE (STATIC) ---
+        const decisionTreeContainer = document.getElementById('decision-tree');
+        const treeHTML = `
+            <div class="border-l-2 border-slate-200 pl-3">
+                <p class="font-semibold">1. Is the problem searchable (<span class="key-term">sorted/monotonic</span>)?</p>
+                <div class="mt-2 space-y-2 pl-3">
+                    <div>
+                        <p class="font-medium text-sky-700">➔ Yes</p>
+                        <div class="border-l-2 border-slate-200 pl-3 mt-2">
+                            <p class="font-semibold">2. What is the search space?</p>
+                            <div class="mt-2 space-y-2 pl-3">
+                                <div>
+                                    <p class="font-medium text-sky-700">➔ An array/list</p>
+                                    <div class="border-l-2 border-slate-200 pl-3 mt-2">
+                                        <p class="font-semibold">3. What is the goal?</p>
+                                        <ul class="list-disc list-inside mt-2 space-y-1 text-slate-600">
+                                            <li>Exact match: <span class="font-semibold">Pattern 1</span></li>
+                                            <li>Find boundary: <span class="font-semibold">Pattern 2</span></li>
+                                            <li>Modified array: <span class="font-semibold">Pattern 3</span></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-sky-700">➔ A conceptual range of answers</p>
+                                    <div class="border-l-2 border-slate-200 pl-3 mt-2">
+                                        <p class="text-slate-600">Use <span class="font-semibold">Pattern 4: BS on Answer</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="font-medium text-red-600">➔ No</p>
+                        <div class="border-l-2 border-slate-200 pl-3 mt-2">
+                            <p class="text-slate-600">Binary Search does not apply.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        decisionTreeContainer.innerHTML = treeHTML;
+    });
+    </script>
+</body>
+</html>
